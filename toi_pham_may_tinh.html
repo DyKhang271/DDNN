@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tội Phạm Máy Tính – Công Nghệ Cao, Hàng Rào Pháp Lý Phải Cao</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0a0f1e;
+      color: #e0e6f0;
+      line-height: 1.8;
+    }
+
+    /* ===== HERO ===== */
+    header {
+      background: linear-gradient(135deg, #0d1b3e 0%, #12295c 50%, #0a1a3a 100%);
+      padding: 24px 20px 40px;
+      text-align: center;
+      border-bottom: 2px solid #1e90ff44;
+      position: relative;
+      overflow: hidden;
+    }
+    header .logo-topleft {
+      position: absolute;
+      top: 18px;
+      left: 24px;
+      z-index: 2;
+    }
+    header .logo-topleft img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 6px;
+      box-shadow: 0 0 18px #1e90ff55, 0 0 4px #1e90ff88;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, #1e90ff22 0%, transparent 70%);
+    }
+    header .badge {
+      display: inline-block;
+      background: #1e90ff22;
+      border: 1px solid #1e90ff66;
+      color: #60b4ff;
+      padding: 5px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: linear-gradient(90deg, #60b4ff, #ffffff, #60b4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    header p.subtitle {
+      color: #8aaddc;
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin: 0 auto 8px;
+    }
+    header .meta {
+      font-size: 0.82rem;
+      color: #4a7ab0;
+      margin-top: 18px;
+    }
+
+
+    /* ===== LAYOUT ===== */
+    .page-wrapper {
+      display: flex;
+      align-items: flex-start;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      gap: 32px;
+    }
+
+    /* ===== SIDEBAR TOC ===== */
+    .sidebar-toc {
+      width: 240px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 24px;
+      background: #111b33;
+      border: 1px solid #1e90ff33;
+      border-radius: 14px;
+      padding: 22px 18px;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+    }
+    .sidebar-toc::-webkit-scrollbar { width: 4px; }
+    .sidebar-toc::-webkit-scrollbar-thumb { background: #1e90ff44; border-radius: 4px; }
+    .sidebar-toc h2 {
+      color: #60b4ff;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #1e90ff22;
+      padding-bottom: 10px;
+    }
+    .sidebar-toc ol { padding-left: 0; list-style: none; }
+    .sidebar-toc li { margin: 0; }
+    .sidebar-toc a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #8aaddc;
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 7px 10px;
+      border-radius: 8px;
+      transition: background 0.15s, color 0.15s;
+      line-height: 1.4;
+    }
+    .sidebar-toc a:hover {
+      background: #1e90ff18;
+      color: #60b4ff;
+    }
+    .sidebar-toc a .toc-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background: #1e3a6e;
+      border-radius: 50%;
+      font-size: 0.72rem;
+      color: #60b4ff;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main { flex: 1; min-width: 0; }
+
+    @media (max-width: 860px) {
+      .sidebar-toc { display: none; }
+      .page-wrapper { flex-direction: column; }
+    }
+
+    /* ===== SECTION ===== */
+    section { margin-bottom: 60px; }
+    section h2 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #1e90ff44;
+    }
+    section h2 .num {
+      display: inline-block;
+      background: #1e90ff;
+      color: #fff;
+      width: 36px; height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 1rem;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    section h3 { font-size: 1.15rem; color: #60b4ff; margin: 28px 0 8px; }
+    section p { color: #c8d8ee; margin-bottom: 14px; }
+
+    /* ===== CARDS ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .card {
+      background: #111b33;
+      border: 1px solid #1e90ff22;
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: #1e90ff88; transform: translateY(-3px); }
+    .card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .card h4 { color: #ffffff; font-size: 1rem; margin-bottom: 8px; }
+    .card p { font-size: 0.9rem; color: #8aaddc; margin: 0; }
+
+    /* ===== EXAMPLE BOX ===== */
+    .example-box {
+      background: #0c1828;
+      border-left: 4px solid #1e90ff;
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .example-box .label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1e90ff;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .example-box p { font-size: 0.92rem; margin: 0; color: #b0c8e8; }
+
+    /* ===== DANGER BOX ===== */
+    .danger-box {
+      background: #1a0d0d;
+      border: 1px solid #ff444466;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 18px 0;
+    }
+    .danger-box .dtitle { color: #ff6060; font-weight: 700; margin-bottom: 6px; font-size: 0.95rem; }
+    .danger-box p { font-size: 0.9rem; color: #e0a0a0; margin: 0; }
+
+    /* ===== STAT ROW ===== */
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .stat-item {
+      flex: 1 1 180px;
+      background: #111b33;
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      border: 1px solid #1e90ff22;
+    }
+    .stat-item .big { font-size: 2rem; font-weight: 900; color: #1e90ff; }
+    .stat-item .desc { font-size: 0.82rem; color: #8aaddc; margin-top: 4px; }
+
+    /* ===== LEGAL TABLE ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+    th {
+      background: #1e3a6e;
+      color: #ffffff;
+      padding: 12px 14px;
+      text-align: left;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #1e2d4a;
+      color: #c8d8ee;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #0e1828; }
+    tr:hover td { background: #132242; }
+
+    /* ===== SOLUTION CARDS ===== */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .sol-card {
+      background: #0d1f3c;
+      border: 1px solid #1e90ff33;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .sol-card .step {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1e90ff;
+      margin-bottom: 8px;
+    }
+    .sol-card h4 { color: #fff; font-size: 1rem; margin-bottom: 8px; }
+    .sol-card p { font-size: 0.88rem; color: #8aaddc; margin: 0; }
+
+    /* ===== QUOTE ===== */
+    blockquote {
+      border-left: 4px solid #1e90ff;
+      padding: 16px 20px;
+      margin: 24px 0;
+      background: #0c1828;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: #8aaddc;
+    }
+    blockquote cite { display: block; margin-top: 8px; font-size: 0.82rem; color: #4a7ab0; font-style: normal; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #070e1c;
+      border-top: 1px solid #1e90ff22;
+      text-align: center;
+      padding: 30px 20px;
+      color: #3a5a80;
+      font-size: 0.82rem;
+    }
+
+    /* ===== HIGHLIGHT ===== */
+    mark { background: #1e90ff33; color: #60b4ff; padding: 1px 4px; border-radius: 3px; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      .stat-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header>
+  <div class="logo-topleft">
+    <img src="logo_truong.png" alt="Logo Trường" />
+  </div>
+
+  <h1>TỘI PHẠM MÁY TÍNH</h1>
+  <p class="subtitle">Công nghệ cao – Hàng rào pháp lý phải cao.<br>
+  Hiểu đúng, nhận diện sớm, bảo vệ bản thân trong kỷ nguyên số.</p>
+  <div class="meta">📅 Cập nhật: Tháng 3/2026 &nbsp;|&nbsp; 📖 Tham khảo: Bộ luật Hình sự 2015, sửa đổi 2017 (Điều 285–289)</div>
+</header>
+
+<div class="page-wrapper">
+
+  <!-- SIDEBAR TOC -->
+  <nav class="sidebar-toc">
+    <h2>📋 Mục lục</h2>
+    <ol>
+      <li><a href="#dinh-nghia"><span class="toc-num">1</span>Tội phạm máy tính là gì?</a></li>
+      <li><a href="#nguyen-nhan"><span class="toc-num">2</span>Tại sao ngày càng tăng?</a></li>
+      <li><a href="#hau-qua"><span class="toc-num">3</span>Hậu quả nghiêm trọng</a></li>
+      <li><a href="#phap-luat"><span class="toc-num">4</span>Khung pháp lý tại VN</a></li>
+      <li><a href="#giai-phap"><span class="toc-num">5</span>Giải pháp toàn diện</a></li>
+      <li><a href="#bao-ve"><span class="toc-num">6</span>Cách bảo vệ bản thân</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <!-- ===== SECTION 1 ===== -->
+  <section id="dinh-nghia">
+    <h2><span class="num">1</span>Tội phạm máy tính là gì?</h2>
+    <p>
+      <strong>Tội phạm máy tính</strong> (cybercrime) là tập hợp các hành vi vi phạm pháp luật được thực hiện 
+      thông qua hoặc nhằm vào hệ thống máy tính, mạng internet, thiết bị điện tử và dữ liệu số. 
+      Không giống tội phạm truyền thống, kẻ tấn công không cần hiện diện tại chỗ — chỉ một đường truyền 
+      internet là đủ để gây thiệt hại cho hàng triệu nạn nhân trên toàn cầu.
+    </p>
+
+    <h3>🔍 Các dạng tội phạm máy tính phổ biến</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon">🎭</div>
+        <h4>Lừa đảo trực tuyến</h4>
+        <p>Giả mạo danh tính (cơ quan công an, ngân hàng, người thân) để chiếm đoạt tài sản qua chuyển khoản, mua sắm ảo, đầu tư tài chính.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🦠</div>
+        <h4>Phát tán mã độc</h4>
+        <p>Cài virus, ransomware, spyware vào thiết bị nạn nhân để đánh cắp dữ liệu, mã hóa tống tiền hoặc biến máy thành "zombie" trong mạng botnet.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🕵️</div>
+        <h4>Tin tặc (Hacking)</h4>
+        <p>Xâm nhập trái phép vào hệ thống của cá nhân, doanh nghiệp, cơ sở hạ tầng nhà nước nhằm đánh cắp, phá hoại hoặc do thám thông tin.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💸</div>
+        <h4>Tống tiền qua mạng</h4>
+        <p>Đe dọa tung ảnh nhạy cảm, thông tin bí mật, hoặc tấn công DDoS vào hệ thống doanh nghiệp nếu không nộp tiền chuộc (thường bằng tiền mã hóa).</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h4>AI Deepfake</h4>
+        <p>Công nghệ AI tạo video/giọng nói giả mạo người nổi tiếng hoặc người thân để lừa gạt tài chính, bôi nhọ danh dự, thông tin sai lệch.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔐</div>
+        <h4>Crypto scam</h4>
+        <p>Dự án tiền mã hoá giả, sàn giao dịch ảo, các chiêu thức "rug pull" khiến nhà đầu tư mất trắng tài sản kỹ thuật số.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="label">📌 Ví dụ thực tế – Vụ lừa đảo Deepfake 2024</div>
+      <p>
+        Tháng 5/2024, một nhân viên tài chính tại Hồng Kông đã bị lừa chuyển <strong>25 triệu USD</strong> sau khi tham gia cuộc họp video với "giám đốc" và các đồng nghiệp — tất cả đều là nhân vật giả mạo bằng AI Deepfake theo thời gian thực. Đây là một trong những vụ lừa đảo deepfake lớn nhất được ghi nhận.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 ===== -->
+  <section id="nguyen-nhan">
+    <h2><span class="num">2</span>Tại sao tội phạm máy tính ngày càng tăng?</h2>
+    <p>
+      Sự bùng nổ của tội phạm mạng không phải ngẫu nhiên — nó là kết quả tất yếu của sự giao thoa giữa 
+      <mark>tốc độ phát triển công nghệ</mark>, <mark>nhận thức pháp luật hạn chế</mark> và <mark>lỗ hổng hạ tầng số</mark>.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="big">70%</div>
+        <div class="desc">Người Việt Nam sử dụng internet thường xuyên (2024)</div>
+      </div>
+      <div class="stat-item">
+        <div class="big">16,000+</div>
+        <div class="desc">Vụ lừa đảo trực tuyến được báo cáo tại Việt Nam năm 2023</div>
+      </div>
+      <div class="stat-item">
+        <div class="big">8,000 tỷ</div>
+        <div class="desc">Thiệt hại ước tính từ tội phạm mạng tại VN mỗi năm (VND)</div>
+      </div>
+      <div class="stat-item">
+        <div class="big">15,000+</div>
+        <div class="desc">Vụ án tội phạm mạng xuyên biên giới INTERPOL xử lý/năm</div>
+      </div>
+    </div>
+
+    <h3>📌 Bốn nguyên nhân cốt lõi</h3>
+
+    <h3>① Internet phổ biến, hạ tầng số tăng nhanh</h3>
+    <p>
+      Việt Nam có hơn 78 triệu người dùng internet (2024). Thanh toán điện tử, mua sắm online, 
+      giao dịch ngân hàng số — tất cả tạo ra "bề mặt tấn công" khổng lồ mà tội phạm khai thác.
+    </p>
+
+    <h3>② Thiếu giác ngộ an ninh mạng</h3>
+    <p>
+      Nhiều người dùng không biết cách nhận diện email phishing, không bật xác thực hai lớp (2FA), 
+      dùng mật khẩu đơn giản hoặc tái sử dụng trên nhiều tài khoản. Kẻ tấn công khai thác điều này 
+      như một "cửa mở" vào dữ liệu cá nhân.
+    </p>
+
+    <div class="example-box">
+      <div class="label">📌 Ví dụ – Tấn công Phishing</div>
+      <p>
+        Năm 2023, hàng nghìn người dùng VNPAY nhận email giả mạo từ địa chỉ trông như thật 
+        (vd: <em>support@vnp4y.com</em>), yêu cầu "xác minh tài khoản". Chỉ cần nhập mật khẩu, 
+        tài khoản lập tức bị chiếm đoạt và số dư bị rút sạch trong vòng vài phút.
+      </p>
+    </div>
+
+    <h3>③ Giao dịch online phát triển nhanh → mục tiêu béo bở</h3>
+    <p>
+      Sự phát triển của fintech, ví điện tử, tiền mã hóa tạo ra dòng tiền số khổng lồ. 
+      Đặc biệt crypto không có cơ chế hoàn tiền như ngân hàng truyền thống — một khi mất là mất vĩnh viễn.
+    </p>
+
+    <h3>④ Thiếu kiến thức pháp lý về công nghệ</h3>
+    <p>
+      Đa số nạn nhân không biết hành vi của mình hoặc của kẻ lừa đảo có thể bị truy cứu hình sự. 
+      Nhiều người chọn im lặng vì xấu hổ, hoặc không tin có thể đòi lại được tiền.
+    </p>
+
+    <div class="danger-box">
+      <div class="dtitle">⚠️ Điểm mù nguy hiểm</div>
+      <p>Một nghiên cứu của Cục An toàn thông tin (ATTT) cho thấy chỉ 30% nạn nhân tội phạm mạng chủ động trình báo cơ quan công an. Phần còn lại chấp nhận mất trắng hoặc không biết phải làm gì.</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 ===== -->
+  <section id="hau-qua">
+    <h2><span class="num">3</span>Hậu quả nghiêm trọng</h2>
+    <p>Tội phạm máy tính không chỉ gây thiệt hại tài chính — nó tàn phá danh dự, sức khỏe tâm lý và thậm chí đe dọa an ninh quốc gia.</p>
+
+    <h3>💾 1. Mất dữ liệu cá nhân</h3>
+    <p>
+      Dữ liệu cá nhân (CCCD, số điện thoại, ảnh, thông tin ngân hàng) bị đánh cắp và 
+      bán trên "chợ đen" dark web. Mỗi bộ dữ liệu đầy đủ có giá từ <strong>100.000đ đến 500.000đ</strong>, 
+      nhưng gây tổn thất cho chủ nhân lên đến hàng trăm triệu đồng.
+    </p>
+    <div class="example-box">
+      <div class="label">📌 Vụ rò rỉ dữ liệu VNG 2023</div>
+      <p>Năm 2023, hơn 163 triệu bản ghi dữ liệu người dùng Zalo bị tin tặc rao bán trên diễn đàn hacker — bao gồm tên, số điện thoại, địa chỉ email. Vụ việc phơi bày lỗ hổng bảo mật nghiêm trọng trong lưu trữ dữ liệu người dùng.</p>
+    </div>
+
+    <h3>🏦 2. Rò rỉ thông tin ngân hàng (~3.000 tỉ đồng/năm)</h3>
+    <p>
+      Số thẻ tín dụng, mã OTP, thông tin đăng nhập internet banking là mục tiêu chính. 
+      Một khi bị đánh cắp, tội phạm có thể rút tiền hoặc mua sắm trực tuyến ngay lập tức 
+      trước khi nạn nhân kịp nhận ra.
+    </p>
+    <div class="example-box">
+      <div class="label">📌 Kịch bản thực tế – SIM Swap Attack</div>
+      <p>Kẻ tấn công dùng thông tin cá nhân đã đánh cắp để liên hệ nhà mạng, yêu cầu chuyển số điện thoại sang SIM mới do chúng kiểm soát. Sau đó, chúng dùng SIM này nhận mã OTP và rút sạch tài khoản ngân hàng của nạn nhân. Một số vụ tại Việt Nam thiệt hại lên đến <strong>2 tỷ đồng trong một đêm</strong>.</p>
+    </div>
+
+    <h3>💰 3. Thiệt hại tài chính (~3.000 tỉ đồng/năm)</h3>
+    <p>
+      Ngoài trộm cắp trực tiếp, tội phạm mạng còn gây thiệt hại gián tiếp: chi phí khắc phục sự cố, 
+      mất khách hàng, giảm giá cổ phiếu sau khi bị tấn công dữ liệu, và phí tư vấn pháp lý.
+    </p>
+    <div class="example-box">
+      <div class="label">📌 Ransomware tấn công doanh nghiệp</div>
+      <p>Tháng 3/2024, hệ thống của VNDIRECT – một trong những công ty chứng khoán lớn nhất Việt Nam – bị tấn công ransomware, gây gián đoạn giao dịch toàn bộ hệ thống trong nhiều ngày. Thiệt hại ước tính gồm cả thiệt hại trực tiếp lẫn mất tín nhiệm khách hàng.</p>
+    </div>
+
+    <h3>🌐 4. Ảnh hưởng uy tín cá nhân và tổ chức</h3>
+    <p>
+      Deepfake, tán phát nội dung xấu, chiếm đoạt tài khoản mạng xã hội có thể phá hủy 
+      sự nghiệp, hôn nhân và sức khỏe tâm thần của nạn nhân — đặc biệt với phụ nữ và người nổi tiếng.
+    </p>
+  </section>
+
+  <!-- ===== SECTION 4 ===== -->
+  <section id="phap-luat">
+    <h2><span class="num">4</span>Khung pháp lý tại Việt Nam</h2>
+    <p>
+      Bộ luật Hình sự 2015 (sửa đổi, bổ sung 2017) đã dành hẳn một mục riêng quy định về 
+      <strong>Tội phạm trong lĩnh vực công nghệ thông tin, mạng viễn thông</strong> (Điều 285–289).
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Điều luật</th>
+          <th>Hành vi</th>
+          <th>Mức phạt tối đa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Điều 285</strong></td>
+          <td>Sản xuất, mua bán, trao đổi, tặng công cụ phá hoại an toàn thông tin</td>
+          <td>Phạt tù đến 7 năm</td>
+        </tr>
+        <tr>
+          <td><strong>Điều 286</strong></td>
+          <td>Phát tán chương trình tin học gây hại (virus, ransomware…)</td>
+          <td>Phạt tù đến 12 năm</td>
+        </tr>
+        <tr>
+          <td><strong>Điều 287</strong></td>
+          <td>Cản trở, gây rối loạn hoạt động mạng máy tính, thiết bị số</td>
+          <td>Phạt tù đến 12 năm</td>
+        </tr>
+        <tr>
+          <td><strong>Điều 288</strong></td>
+          <td>Đưa hoặc sử dụng thông tin sai lệch trên mạng (lừa đảo, bôi nhọ…)</td>
+          <td>Phạt tù đến 12 năm</td>
+        </tr>
+        <tr>
+          <td><strong>Điều 289</strong></td>
+          <td>Xâm nhập trái phép vào mạng máy tính, hệ thống thông tin</td>
+          <td>Phạt tù đến 12 năm</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      "Người nào cố ý… xâm nhập trái phép vào mạng máy tính, mạng viễn thông, phương tiện điện tử của người khác, thì bị phạt tiền từ 50.000.000 đồng đến 300.000.000 đồng hoặc phạt tù từ 01 năm đến 05 năm."
+      <cite>— Bộ luật Hình sự 2015, Điều 289, Khoản 1</cite>
+    </blockquote>
+
+    <h3>⚠️ Lỗ hổng pháp lý hiện tại</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h4>Chưa có quy định về AI deepfake</h4>
+        <p>Luật hiện hành chưa có điều khoản đặc thù về việc tạo hoặc phát tán nội dung deepfake nhằm lừa đảo.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💰</div>
+        <h4>Tiền mã hóa – vùng xám pháp lý</h4>
+        <p>Lừa đảo qua crypto chưa có cơ chế bồi thường rõ ràng vì crypto chưa được công nhận là tài sản hợp pháp tại VN.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌍</div>
+        <h4>Tội phạm xuyên biên giới khó truy tố</h4>
+        <p>Kẻ tấn công ngồi ở nước khác, nạn nhân ở Việt Nam — cơ chế dẫn độ và hợp tác quốc tế còn hạn chế.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5 ===== -->
+  <section id="giai-phap">
+    <h2><span class="num">5</span>Giải pháp toàn diện</h2>
+    <p>Để đối phó với tội phạm mạng, cần một hệ sinh thái phòng thủ bao gồm pháp luật, công nghệ, giáo dục và hợp tác quốc tế.</p>
+
+    <div class="solution-grid">
+      <div class="sol-card">
+        <div class="step">Giải pháp 01</div>
+        <h4>🚀 Cập nhật pháp luật theo kịp công nghệ</h4>
+        <p>Bổ sung quy định về AI deepfake, ransomware, crypto scam. Rà soát và ban hành các điều luật mới trong giai đoạn 2024–2026 phù hợp thực tiễn.</p>
+      </div>
+      <div class="sol-card">
+        <div class="step">Giải pháp 02</div>
+        <h4>🛡️ Bảo vệ quyền lợi người dân & doanh nghiệp</h4>
+        <p>Xây dựng đường dây hỗ trợ 24/7 (hotline), cổng tiếp nhận trực tuyến, QR code checklist bảo mật cá nhân để người dân dễ tiếp cận.</p>
+      </div>
+      <div class="sol-card">
+        <div class="step">Giải pháp 03</div>
+        <h4>🌐 Phù hợp xu thế quốc tế</h4>
+        <p>Tăng cường hợp tác INTERPOL, Europol. Hiện INTERPOL xử lý hơn 15.000 vụ tội phạm mạng xuyên biên giới/năm — VN cần tham gia tích cực hơn.</p>
+      </div>
+      <div class="sol-card">
+        <div class="step">Giải pháp 04</div>
+        <h4>🧠 Gắn trách nhiệm nhà cung cấp công nghệ mới</h4>
+        <p>Nhà cung cấp AI, deepfake, VNPAY phải có trách nhiệm pháp lý nếu sản phẩm bị lạm dụng. Kiểm toán thuật toán và báo cáo minh bạch về sự cố bảo mật.</p>
+      </div>
+      <div class="sol-card">
+        <div class="step">Giải pháp 05</div>
+        <h4>🤝 Tăng niềm tin xã hội vào môi trường số</h4>
+        <p>Giáo dục cộng đồng từ cấp tiểu học về an toàn mạng. Xây dựng hệ sinh thái số an toàn, nơi người dùng nhận ra mối nguy và tự bảo vệ được.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6 ===== -->
+  <section id="bao-ve">
+    <h2><span class="num">6</span>Cách bảo vệ bản thân – Checklist thực hành</h2>
+    <p>Dù luật pháp được cải thiện, phòng thủ cá nhân là lớp bảo vệ đầu tiên và quan trọng nhất.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon">🔑</div>
+        <h4>Bật xác thực 2 lớp (2FA)</h4>
+        <p>Dùng ứng dụng xác thực (Google Authenticator, Authy) thay vì SMS OTP — bảo mật hơn trước tấn công SIM Swap.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔒</div>
+        <h4>Mật khẩu mạnh & duy nhất</h4>
+        <p>Dùng trình quản lý mật khẩu (Bitwarden, 1Password). Không tái sử dụng mật khẩu giữa các tài khoản.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📧</div>
+        <h4>Nhận biết Phishing</h4>
+        <p>Luôn kiểm tra URL thực sự (hover chuột), không bao giờ nhập OTP hay mật khẩu theo yêu cầu trong email.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛡️</div>
+        <h4>Cập nhật phần mềm thường xuyên</h4>
+        <p>Bản vá bảo mật vá lỗ hổng mà tội phạm đang khai thác. Không trì hoãn cập nhật hệ điều hành và ứng dụng.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💾</div>
+        <h4>Sao lưu dữ liệu (3-2-1 Rule)</h4>
+        <p>3 bản sao, 2 loại phương tiện lưu trữ, 1 bản offline/đám mây. Đây là vũ khí tốt nhất chống ransomware.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📞</div>
+        <h4>Trình báo ngay khi bị tấn công</h4>
+        <p>Liên hệ Cục An toàn thông tin – Bộ TT&TT: <strong>1800 1709</strong> (miễn phí). Không xấu hổ, không im lặng.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="label">📌 Câu chuyện thực tế – "Cú điện thoại 500 triệu"</div>
+      <p>
+        Bà N.T.H, 58 tuổi tại Hà Nội, nhận điện thoại từ người tự xưng là "Công an Bộ", thông báo tài khoản bà liên quan đến vụ rửa tiền và yêu cầu chuyển 500 triệu đồng vào tài khoản "tạm giữ" để điều tra. Bà chuyển xong trong vòng 30 phút.
+        <br><br>
+        <strong>Bài học:</strong> Cơ quan công an <em>không bao giờ</em> yêu cầu chuyển tiền qua điện thoại. Bất kỳ ai yêu cầu như vậy — dù giọng nói, hình ảnh có vẻ xác thực đến đâu — đều là lừa đảo.
+      </p>
+    </div>
+  </section>
+
+  </main>
+
+</div><!-- end .page-wrapper -->
+
+<footer>
+  <p>📚 Tài liệu tham khảo: Bộ luật Hình sự 2015 (sửa đổi 2017), Điều 285–289 | Cục An toàn thông tin – Bộ TT&TT | INTERPOL Cybercrime Report 2024</p>
+  <p style="margin-top:8px;">© 2026 · Bài viết phục vụ mục đích giáo dục và phổ biến pháp luật.</p>
+</footer>
+
+</body>
+</html>
